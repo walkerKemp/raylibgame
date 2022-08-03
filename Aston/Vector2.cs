@@ -1,0 +1,74 @@
+namespace Aston;
+
+public class Vector2
+{
+    public float X;
+    public float Y;
+
+    public Vector2()
+    {
+        X = 0.0f;
+        Y = 0.0f;
+    }
+
+    public Vector2(float Base)
+    {
+        X = Base;
+        Y = Base;
+    }
+
+    public Vector2(float Ux, float Uy)
+    {
+        X = Ux;
+        Y = Uy;
+    }
+
+    public static Vector2 FromRadians(float R)
+    {
+        Vector2 ret = new Vector2();
+
+        ret.X = (float)Math.Round((float)Math.Cos(R), 6);
+        ret.Y = (float)Math.Round((float)Math.Sin(R), 6);
+
+        return ret;
+    }
+
+    public static Vector2 operator+(Vector2 s, Vector2 r)
+    {
+        Vector2 ret = new Vector2();
+        ret.X = s.X + r.X;
+        ret.Y = s.Y + r.Y;
+        return ret;
+    }
+    
+    public static Vector2 operator-(Vector2 s, Vector2 r)
+    {
+        Vector2 ret = new Vector2();
+        ret.X = r.X - s.X;
+        ret.Y = r.Y - s.Y;
+        return ret;
+    }
+
+    // Test
+    public static Vector2 operator*(Vector2 s, Vector2 r)
+    {
+        Vector2 ret = new Vector2();
+        ret.X = s.X * r.X;
+        ret.Y = s.Y * r.Y;
+        return ret;
+    }
+
+    // Test
+    public static Vector2 operator/(Vector2 s, Vector2 r)
+    {
+        Vector2 ret = new Vector2();
+        ret.X = r.X / s.Y;
+        ret.Y = r.Y / s.Y;
+        return ret;
+    }
+
+    public override string ToString()
+    {
+        return $"<{X}, {Y}>";
+    }
+}

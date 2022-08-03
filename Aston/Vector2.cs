@@ -49,7 +49,6 @@ public class Vector2
         return ret;
     }
 
-    // Test
     public static Vector2 operator*(Vector2 s, Vector2 r)
     {
         Vector2 ret = new Vector2();
@@ -58,12 +57,26 @@ public class Vector2
         return ret;
     }
 
-    // Test
+    public static Vector2 operator*(Vector2 s, float r) {
+        Vector2 ret = new Vector2();
+        ret.X = s.X * r;
+        ret.Y = s.Y * r;
+        return ret;
+    }
+
     public static Vector2 operator/(Vector2 s, Vector2 r)
     {
         Vector2 ret = new Vector2();
-        ret.X = r.X / s.Y;
-        ret.Y = r.Y / s.Y;
+        ret.X = r.X == 0.0f ? 0.0f : s.X / r.X;
+        ret.Y = r.Y == 0.0f ? 0.0f : s.Y / r.Y;
+        return ret;
+    }
+
+    public static Vector2 operator/(Vector2 s, float r) {
+        Vector2 ret = new Vector2();
+        if (r == 0.0f) { return ret; }
+        ret.X = s.X / r;
+        ret.Y = s.Y / r;
         return ret;
     }
 

@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "DSWgXrLrA8FKaoH/zVMcdsBNRM66G9XX+byyGM3hQoHEYoyQ1Hl8bdfs5kzsSKlASBgqGMu5EqJ/IP/zRx0Efw==",
+  "dgSpecHash": "EcZC/Ri/lDZAV+xi10FXfPx1aubuh8oBVNsXsg2GJbfVrqaYesiOrfnY9ZQXj6HrPoMT2YY+ZCw5Y3zIzhJ+PQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\attac\\onedrive\\desktop\\raylibgame\\raylibgame.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\attac\\.nuget\\packages\\keralua\\1.3.1\\keralua.1.3.1.nupkg.sha512",
+    "C:\\Users\\attac\\.nuget\\packages\\nlua\\1.6.0\\nlua.1.6.0.nupkg.sha512",
     "C:\\Users\\attac\\.nuget\\packages\\raylib-cs\\4.0.0.1\\raylib-cs.4.0.0.1.nupkg.sha512",
     "C:\\Users\\attac\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512"
   ],

@@ -47,6 +47,10 @@
             "Raylib-cs": {
               "target": "Package",
               "version": "[4.0.0.1, )"
+            },
+            "nlua": {
+              "target": "Package",
+              "version": "[1.6.0, )"
             }
           },
           "imports": [

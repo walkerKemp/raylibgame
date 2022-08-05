@@ -297,23 +297,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\attac\\.nuget\\packages\\": {},
+    "C:\\Users\\Walkers-Work-Machine\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\attac\\onedrive\\desktop\\raylibgame\\raylibgame.csproj",
+      "projectUniqueName": "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\raylibgame.csproj",
       "projectName": "raylibgame",
-      "projectPath": "C:\\Users\\attac\\onedrive\\desktop\\raylibgame\\raylibgame.csproj",
-      "packagesPath": "C:\\Users\\attac\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\attac\\onedrive\\desktop\\raylibgame\\obj\\",
+      "projectPath": "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\raylibgame.csproj",
+      "packagesPath": "C:\\Users\\Walkers-Work-Machine\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\attac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Walkers-Work-Machine\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -364,7 +364,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

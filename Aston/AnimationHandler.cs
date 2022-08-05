@@ -13,8 +13,14 @@ public class AnimationHandler
     private float PlaybackPoint;
     public int TileWidth;
     public int TileHeight;
-    private Rectangle RenderRec;
-    private System.Numerics.Vector2 RenderPos;
+    private Rectangle SourceRec;
+    private Rectangle DestRec;
+    private System.Numerics.Vector2 RenderOrigin = new System.Numerics.Vector2(0.0f, 0.0f);
+    private float Rotation = 0.0f;
+    private Color RenderColor = Color.WHITE;
+    public bool DebugRender;
+    public Action OnEnter;
+    public Action OnExit;
 
     public AnimationHandler(string FileName, int NumImages, float PlaybackSpeed, int TileWidth, int TileHeight)
     {
@@ -27,7 +33,19 @@ public class AnimationHandler
         this.PlaybackPoint = 0.0f;
         this.TileWidth = TileWidth;
         this.TileHeight = TileHeight;
-        this.RenderRec = new Rectangle(0, 0, TileWidth, TileHeight);
+        this.SourceRec = new Rectangle(0, 0, TileWidth, TileHeight);
+        this.DestRec = new Rectangle(0, 0, TileWidth, TileHeight);
+        this.DebugRender = false;
+
+        this.OnEnter = delegate()
+        {
+
+        };
+
+        this.OnExit = delegate()
+        {
+            this.Index = 0;
+        };
     }
 
     public void DeferredLoad()
@@ -51,13 +69,16 @@ public class AnimationHandler
             }
         }
 
-        this.RenderRec.x = this.Index * this.TileWidth;
+        this.SourceRec.x = this.Index * this.TileWidth;
     }
 
-    public void Render(int X, int Y)
+    public void Render(int X, int Y, int renderWidth, int renderHeight)
     {
-        this.RenderPos.X = X;
-        this.RenderPos.Y = Y;
-        Raylib.DrawTextureRec(this.SpriteAtlas, this.RenderRec, this.RenderPos, Color.WHITE);
+        this.DestRec.x = X;
+        this.DestRec.y = Y;
+        this.DestRec.width = renderWidth;
+        this.DestRec.height = renderHeight;
+
+        Raylib.DrawTexturePro(this.SpriteAtlas, this.SourceRec, this.DestRec, this.RenderOrigin, this.Rotation, this.RenderColor);
     }
 }

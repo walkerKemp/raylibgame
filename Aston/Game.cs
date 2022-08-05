@@ -9,14 +9,38 @@ public class Game
     public Game()
     {
         wh = new WindowHandle(1280, 720, 60, "Test");
-        Entity test = new Entity();
-        test.WithComponent(new Transform());
 
-        Transform? tc = test.GetComponent<Transform>();
-        if (tc != null)
+        Entity test = new Entity(ref wh);
+        test
+            .WithComponent(new TransformComponent(new Vector2(1280/2, 720/2), new Vector2(120*4, 80*4), 0))
+            .WithComponent(new AnimationComponent());
+        
+
+        using (AnimationComponent? ac = test.GetComponent<AnimationComponent>())
         {
-            Console.WriteLine(tc.Position);
+            if (ac != null)
+            {
+                ac.RegisterAtlasFile("KnightIdle", "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\Assets\\Knight\\_Idle.png");
+                ac.SetAtlas("KnightIdle");
+                ac.AnimHandler.Active = true;
+                ac.AnimHandler.ConformToCurrent(10, 1/10, 120, 80);
+            }
         }
+
+        wh.OnUpdate = delegate()
+        {
+            test.Update();
+        };
+
+        wh.OnRender = delegate()
+        {
+            Raylib.ClearBackground(Color.BLACK);
+            using (AnimationComponent? ac = test.GetComponent<AnimationComponent>())
+            {
+                if (ac == null) return; 
+                ac.Render();
+            }
+        };
     }
 
     public void Run() 

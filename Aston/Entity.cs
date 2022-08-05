@@ -28,6 +28,8 @@ public class TransformComponent : Component
     }
 }
 
+public class TransformSystem : BaseSystem<TransformComponent> {}
+
 public class AnimationComponent : Component
 {
     public AnimationHandler AnimHandler = new AnimationHandler();
@@ -81,7 +83,24 @@ public class AnimationComponent : Component
         TransformComponent? tc = this.Entity.GetComponent<TransformComponent>();
         if (tc == null) return;
         this.AnimHandler.Render((int)tc.Position.X, (int)tc.Position.Y, (int)tc.Scale.X, (int)tc.Scale.Y);
-        Console.WriteLine("We are hitting this");
+    }
+}
+
+public class BaseSystem<T> where T : Component
+{
+    protected static List<T> Components = new List<T>();
+
+    public static void Register(T component)
+    {
+        Components.Add(component);
+    }
+
+    public static void Update(ref WindowHandle wh)
+    {
+        foreach (T component in Components)
+        {
+            component.Update(ref wh);
+        }
     }
 }
 

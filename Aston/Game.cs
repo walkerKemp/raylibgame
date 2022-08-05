@@ -8,27 +8,15 @@ public class Game
 
     public Game()
     {
-        string fileLocation = "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\Assets\\Knight\\_Idle.png";
-        AnimationHandler KnightWalking = new AnimationHandler(fileLocation, 10, 1/5f, 120, 80);
-
         wh = new WindowHandle(1280, 720, 60, "Test");
+        Entity test = new Entity();
+        test.WithComponent(new Transform());
 
-        wh.OnEnter = delegate()
+        Transform? tc = test.GetComponent<Transform>();
+        if (tc != null)
         {
-            KnightWalking.DeferredLoad();
-        };
-
-        wh.OnUpdate = delegate()
-        {
-            KnightWalking.Update(ref wh);
-        };
-
-        wh.OnRender = delegate()
-        {
-            Raylib.ClearBackground(Color.BLACK);
-            Raylib.DrawFPS(4, 4);
-            KnightWalking.Render(1280/2, 720/2, 480, 320);
-        };
+            Console.WriteLine(tc.Position);
+        }
     }
 
     public void Run() 

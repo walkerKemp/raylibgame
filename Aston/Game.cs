@@ -20,10 +20,10 @@ public class Game
         {
             if (ac != null)
             {
-                ac.RegisterAtlasFile("KnightIdle", "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\Assets\\Knight\\_Idle.png");
+                ac.RegisterAtlasFile("KnightIdle", "C:\\Users\\attac\\onedrive\\desktop\\raylibgame\\Assets\\Knight\\_Idle.png");
                 ac.SetAtlas("KnightIdle");
                 ac.AnimHandler.Active = true;
-                ac.AnimHandler.ConformToCurrent(10, 1/10, 120, 80);
+                ac.AnimHandler.ConformToCurrent(10, 1/2, 120, 80);
             }
         }
 

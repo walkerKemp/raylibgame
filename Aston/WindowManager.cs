@@ -1,7 +1,6 @@
 using Raylib_cs;
 using NLua;
 using System.Text;
-using System.Collections.Generic;
 
 namespace Aston;
 
@@ -60,20 +59,32 @@ public class WindowHandle
             foreach (KeyValuePair<Object, Object> item in test) {
                 if (item.Value == null) { continue; }
 
-                if (item.Key.ToString() == "title") {
-                    t = item.Value.ToString();
+                if (item.Key.ToString() == "title")
+                {
+                    string? cacheTitle = item.Value.ToString();
+                    if (cacheTitle == null) { cacheTitle = t; }
+                    t = cacheTitle;
                 }
 
-                if (item.Key.ToString() == "width") {
-                    w = Int32.Parse(item.Value.ToString());
+                if (item.Key.ToString() == "width")
+                {
+                    string? cacheWidth = item.Value.ToString();
+                    if (cacheWidth == null) { cacheWidth = w.ToString(); }
+                    w = Int32.Parse(cacheWidth);
                 }
 
-                if (item.Key.ToString() == "height") {
-                    h = Int32.Parse(item.Value.ToString());
+                if (item.Key.ToString() == "height")
+                {
+                    string? cacheHeight = item.Value.ToString();
+                    if (cacheHeight == null) { cacheHeight = h.ToString(); }
+                    h = Int32.Parse(cacheHeight);
                 }
 
-                if (item.Key.ToString() == "targetfps") {
-                    tf = Int32.Parse(item.Value.ToString());
+                if (item.Key.ToString() == "targetfps")
+                {
+                    string? cacheTargetFPS = item.Value.ToString();
+                    if (cacheTargetFPS == null) { cacheTargetFPS = tf.ToString(); }
+                    tf = Int32.Parse(cacheTargetFPS);
                 }
             }
         }

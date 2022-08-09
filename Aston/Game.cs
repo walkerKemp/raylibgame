@@ -9,20 +9,32 @@ public class Game
     public Game()
     {
         // wh = new WindowHandle(1280, 720, 60, "Test");
-        wh = WindowHandle.FromConfig("C:\\Users\\attac\\onedrive\\desktop\\raylibgame\\Config\\config.lua");
+        wh = WindowHandle.FromConfig("C:\\Users\\Walkers-Work-Machine\\Desktop\\programs\\raylibgame\\Config\\config.lua");
 
         Entity test = new Entity(ref wh)
             .WithComponent(new TransformComponent(new Vector2(1280/2, 720/2), new Vector2(120*4, 80*4), 0))
-            .WithComponent(new AnimationComponent());
+            .WithComponent(new AnimationComponent())
+            .WithComponent(new InputComponent());
 
         using (AnimationComponent? ac = test.GetComponent<AnimationComponent>())
         {
             if (ac != null)
             {
-                ac.RegisterAtlasFile("KnightIdle", "C:\\Users\\attac\\onedrive\\desktop\\raylibgame\\Assets\\Knight\\_Run.png");
+                ac.RegisterAtlasFile("KnightIdle", "C:\\Users\\Walkers-Work-Machine\\Desktop\\programs\\raylibgame\\Assets\\Knight\\_Idle.png");
                 ac.SetAtlas("KnightIdle");
                 ac.AnimHandler.Active = true;
-                ac.AnimHandler.ConformToCurrent(10, 3/4, 120, 80);
+                ac.AnimHandler.ConformToCurrent(10, 1/15f, 120, 80);
+            }
+        }
+
+        using (InputComponent? ic = test.GetComponent<InputComponent>())
+        {
+            if (ic != null)
+            {
+                ic.RegisterKey(KeyboardKey.KEY_W, InputEvent.Pressed, delegate(Entity _)
+                {
+                    Console.WriteLine("Test");
+                });
             }
         }
 

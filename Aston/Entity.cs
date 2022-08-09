@@ -1,4 +1,5 @@
 using Raylib_cs;
+using System.Collections.Generic;
 
 namespace Aston;
 
@@ -26,8 +27,6 @@ public class TransformComponent : Component
         this.LayerDepth = LayerDepth;
     }
 }
-
-public class TransformSystem : BaseSystem<TransformComponent> {}
 
 public class AnimationComponent : Component
 {
@@ -85,20 +84,76 @@ public class AnimationComponent : Component
     }
 }
 
-public class BaseSystem<T> where T : Component
+public enum InputEvent
 {
-    protected static List<T> Components = new List<T>();
+    Pressed,
+    Released,
+    Held,
+    Up
+}
 
-    public static void Register(T component)
+public class InputComponent : Component
+{
+    private Dictionary<(KeyboardKey, InputEvent), Action<Entity>> Events = new Dictionary<(KeyboardKey, InputEvent), Action<Entity>>();
+
+    public void RegisterKey(KeyboardKey key, InputEvent ie, Action<Entity> action)
     {
-        Components.Add(component);
+        if (this.Events.ContainsKey((key, ie)))
+        {
+            this.Events[(key, ie)] = action;
+        } else
+        {
+            this.Events.Add((key, ie), action);
+        }
     }
 
-    public static void Update(ref WindowHandle wh)
+    public void DeregisterKey(KeyboardKey key, InputEvent ie)
     {
-        foreach (T component in Components)
+        if (this.Events.ContainsKey((key, ie)))
         {
-            component.Update(ref wh);
+            this.Events.Remove((key, ie));
+        }
+    }
+
+    public override void Update(ref WindowHandle wh)
+    {
+        foreach ((KeyboardKey, InputEvent) key in this.Events.Keys)
+        {
+            switch (key.Item2)
+            {
+                case InputEvent.Pressed:
+                    if (Raylib.IsKeyPressed(key.Item1))
+                    {
+                        if (this.Entity == null) { break; }
+                        this.Events[key](this.Entity);
+                    }
+
+                    break;
+                case InputEvent.Held:
+                    if (Raylib.IsKeyDown(key.Item1))
+                    {
+                        if (this.Entity == null) { break; }
+                        this.Events[key](this.Entity);
+                    }
+
+                    break;
+                case InputEvent.Released:
+                    if (Raylib.IsKeyReleased(key.Item1))
+                    {
+                        if (this.Entity == null) { break; }
+                        this.Events[key](this.Entity);
+                    }
+
+                    break;
+                case InputEvent.Up:
+                    if (Raylib.IsKeyUp(key.Item1))
+                    {
+                        if (this.Entity == null) { break; }
+                        this.Events[key](this.Entity);
+                    }
+
+                    break;
+            }
         }
     }
 }

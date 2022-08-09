@@ -14,7 +14,16 @@ public class Game
         Entity test = new Entity(ref wh)
             .WithComponent(new TransformComponent(new Vector2(1280/2, 720/2), new Vector2(120*4, 80*4), 0))
             .WithComponent(new AnimationComponent())
-            .WithComponent(new InputComponent());
+            .WithComponent(new InputComponent())
+            .WithComponent(new DataComponent());
+
+        using (DataComponent? dc =  test.GetComponent<DataComponent>())
+        {
+            if (dc != null)
+            {
+                dc.RegisterVariable("sprinting", false);
+            }
+        }
 
         using (AnimationComponent? ac = test.GetComponent<AnimationComponent>())
         {
@@ -31,9 +40,17 @@ public class Game
         {
             if (ic != null)
             {
-                ic.RegisterKey(KeyboardKey.KEY_W, InputEvent.Pressed, delegate(Entity _)
+                ic.RegisterKey(KeyboardKey.KEY_W, InputEvent.Held, delegate(Entity e)
                 {
-                    Console.WriteLine("Test");
+                    using (TransformComponent? tc = e.GetComponent<TransformComponent>())
+                    {
+                        if (tc != null)
+                        {
+                            if (tc.Entity == null) { return; }
+                            float deltaTime = tc.Entity.wh.DeltaTime;
+                            tc.Position += new Vector2(0.0f, -1.0f);
+                        }
+                    }
                 });
             }
         }

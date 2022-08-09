@@ -13,6 +13,28 @@ public class Component : IDisposable
     }
 }
 
+public class DataComponent : Component
+{
+    public Dictionary<string, object> Data = new Dictionary<string, object>();
+    public void RegisterVariable(string Key, object Base)
+    {
+        if (!this.Data.Keys.Contains<string>(Key))
+        {
+            this.Data.Add(Key, Base);
+        }
+    }
+
+    public void DeregisterVariable(string Key)
+    {
+        if (this.Data.Keys.Contains<string>(Key))
+        {
+            this.Data.Remove(Key);
+        }
+    }
+
+    public bool ContainsVariable(string Key) { return this.Data.Keys.Contains<String>(Key); }
+}
+
 public class TransformComponent : Component
 {
     public Vector2 Position = new Vector2();

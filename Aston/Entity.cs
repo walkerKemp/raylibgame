@@ -13,28 +13,6 @@ public class Component : IDisposable
     }
 }
 
-public class DataComponent : Component
-{
-    public Dictionary<string, object> Data = new Dictionary<string, object>();
-    public void RegisterVariable(string Key, object Base)
-    {
-        if (!this.Data.Keys.Contains<string>(Key))
-        {
-            this.Data.Add(Key, Base);
-        }
-    }
-
-    public void DeregisterVariable(string Key)
-    {
-        if (this.Data.Keys.Contains<string>(Key))
-        {
-            this.Data.Remove(Key);
-        }
-    }
-
-    public bool ContainsVariable(string Key) { return this.Data.Keys.Contains<String>(Key); }
-}
-
 public class TransformComponent : Component
 {
     public Vector2 Position = new Vector2();
@@ -180,11 +158,52 @@ public class InputComponent : Component
     }
 }
 
+public class MovementComponent : Component
+{
+    public Vector2 Position = new Vector2();
+    public Vector2 Velocity = new Vector2();
+    public Vector2 Acceleration = new Vector2();
+    public float WalkSpeed = 128.0f;
+    public float SprintSpeed = 256.0f;
+    public float CurrentSpeed = 128.0f;
+    public bool IsSprinting = false;
+    public float AccelerationSpeed = 128.0f;
+
+    public override void Update(ref WindowHandle wh)
+    {
+        this.CurrentSpeed = this.IsSprinting ? this.SprintSpeed : this.WalkSpeed;
+
+        if (this.Entity == null) return;
+        float DeltaTime = this.Entity.wh.DeltaTime;
+
+        if (this.Velocity.GetMag() >= this.CurrentSpeed)
+        {
+            this.Velocity.SetMag(this.CurrentSpeed);
+        }
+
+        this.Position += this.Velocity;
+        this.Velocity += this.Acceleration;
+        this.Velocity *= DeltaTime;
+        this.Acceleration.Clear();
+
+        using (TransformComponent? tc = this.Entity?.GetComponent<TransformComponent>())
+        {
+            if (tc != null) { tc.Position = this.Position; }
+        }
+    }
+
+    public void Impulse(Vector2 Force)
+    {
+        this.Acceleration += Force;
+    }
+}
+
 public class Entity
 {
     public WindowHandle wh;
     public int ID { get; set; }
     public List<Component> Components = new List<Component>();
+    public Dictionary<string, object> Data = new Dictionary<string, object>();
 
     public Entity(ref WindowHandle wh)
     {

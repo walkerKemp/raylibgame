@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\raylibgame.csproj": {}
+    "C:\\Users\\Walkers-Work-Machine\\Desktop\\programs\\raylibgame\\raylibgame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\raylibgame.csproj": {
+    "C:\\Users\\Walkers-Work-Machine\\Desktop\\programs\\raylibgame\\raylibgame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\raylibgame.csproj",
+        "projectUniqueName": "C:\\Users\\Walkers-Work-Machine\\Desktop\\programs\\raylibgame\\raylibgame.csproj",
         "projectName": "raylibgame",
-        "projectPath": "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\raylibgame.csproj",
+        "projectPath": "C:\\Users\\Walkers-Work-Machine\\Desktop\\programs\\raylibgame\\raylibgame.csproj",
         "packagesPath": "C:\\Users\\Walkers-Work-Machine\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Walkers-Work-Machine\\desktop\\programs\\raylibgame\\obj\\",
+        "outputPath": "C:\\Users\\Walkers-Work-Machine\\Desktop\\programs\\raylibgame\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

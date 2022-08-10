@@ -80,6 +80,25 @@ public class Vector2
         return ret;
     }
 
+    public void Clear()
+    {
+        this.X = 0.0f;
+        this.Y = 0.0f;
+    }
+
+    public float GetMag()
+    {
+        return (float)Math.Sqrt((this.X * this.X) + (this.Y * this.Y));
+    }
+
+    public void SetMag(float Scale)
+    {
+        float div = this.GetMag();
+        if (div == 0.0f) { return; }
+        this.X /= div;
+        this.Y /= div;
+    }
+
     public override string ToString()
     {
         return $"<{X}, {Y}>";

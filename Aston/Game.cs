@@ -12,18 +12,12 @@ public class Game
         wh = WindowHandle.FromConfig("C:\\Users\\Walkers-Work-Machine\\Desktop\\programs\\raylibgame\\Config\\config.lua");
 
         Entity test = new Entity(ref wh)
-            .WithComponent(new TransformComponent(new Vector2(1280/2, 720/2), new Vector2(120*4, 80*4), 0))
+            .WithComponent(new TransformComponent(new Vector2(1280/2, 720/2), new Vector2(120*2, 80*2), 0))
             .WithComponent(new AnimationComponent())
             .WithComponent(new InputComponent())
-            .WithComponent(new DataComponent());
+            .WithComponent(new MovementComponent());
 
-        using (DataComponent? dc =  test.GetComponent<DataComponent>())
-        {
-            if (dc != null)
-            {
-                dc.RegisterVariable("sprinting", false);
-            }
-        }
+        test.Data.Add("issprinting", false);
 
         using (AnimationComponent? ac = test.GetComponent<AnimationComponent>())
         {
@@ -42,14 +36,37 @@ public class Game
             {
                 ic.RegisterKey(KeyboardKey.KEY_W, InputEvent.Held, delegate(Entity e)
                 {
-                    using (TransformComponent? tc = e.GetComponent<TransformComponent>())
+                    using (MovementComponent? mc = test.GetComponent<MovementComponent>())
                     {
-                        if (tc != null)
-                        {
-                            if (tc.Entity == null) { return; }
-                            float deltaTime = tc.Entity.wh.DeltaTime;
-                            tc.Position += new Vector2(0.0f, -1.0f);
-                        }
+                        if (mc == null) return;
+                        mc.Impulse(new Vector2(0.0f, -mc.AccelerationSpeed));
+                    }
+                });
+
+                ic.RegisterKey(KeyboardKey.KEY_S, InputEvent.Held, delegate(Entity e)
+                {
+                    using (MovementComponent? mc = test.GetComponent<MovementComponent>())
+                    {
+                        if (mc == null) return;
+                        mc.Impulse(new Vector2(0.0f, mc.AccelerationSpeed));
+                    }
+                });
+
+                ic.RegisterKey(KeyboardKey.KEY_LEFT_SHIFT, InputEvent.Pressed, delegate(Entity e)
+                {
+                    using (MovementComponent? mc = test.GetComponent<MovementComponent>())
+                    {
+                        if (mc == null) return;
+                        mc.IsSprinting = true;
+                    }
+                });
+
+                ic.RegisterKey(KeyboardKey.KEY_LEFT_SHIFT, InputEvent.Released, delegate(Entity e)
+                {
+                    using (MovementComponent? mc = test.GetComponent<MovementComponent>())
+                    {
+                        if (mc == null) return;
+                        mc.IsSprinting = false;
                     }
                 });
             }
